@@ -1,0 +1,4 @@
+= Docker and Pipeline Demos
+
+This repository contains a number of branches, each with a `Jenkinsfile`, for
+demonstrating Jenkins Pipeline and Docker integration.
