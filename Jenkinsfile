@@ -16,7 +16,7 @@ parallel(jdk7: {
             }
         }
     }
-}
+})
 
 node('docker') {
     stage('Test') {
