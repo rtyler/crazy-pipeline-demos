@@ -2,7 +2,10 @@
 
 node('docker') {
     stage('Build') {
-        echo 'im building'
+        docker.image('alpine').inside {
+            echo 'im building'
+            sh 'uname -a'
+        }
     }
 
     stage('Test') {
