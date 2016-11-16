@@ -4,14 +4,14 @@ node('docker') {
     stage('Build') {
         docker.image('alpine').inside {
             echo 'im building'
-            sh 'uname -a'
+            sh 'echo "HELLO" > artifact.txt'
         }
     }
 
     stage('Test') {
         docker.image('redis').withRun { container ->
             docker.image('maven').inside("--link ${container.id}:redis") {
-                sh 'host redis'
+                sh 'cat artifact.txt'
                 sh 'ls -lah'
             }
         }
