@@ -10,7 +10,10 @@ node('docker') {
 
     stage('Test') {
         docker.image('redis').withRun { container ->
-            sh 'ls -lah'
+            docker.image('maven').inside("--link ${container.id}:redis") {
+                sh 'host redis'
+                sh 'ls -lah'
+            }
         }
     }
 
