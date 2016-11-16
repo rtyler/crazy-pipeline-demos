@@ -2,6 +2,11 @@
 
 node('docker') {
     docker.image('alpine').inside {
-        sh 'uname -a'
+        stage('Current Platform') {
+            sh 'uname -a'
+        }
+        stage('Another thing') {
+            sh 'printenv'
+        }
     }
 }
