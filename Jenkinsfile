@@ -9,9 +9,8 @@ node('docker') {
     }
 
     stage('Test') {
-        sleep 10
-        docker.image('maven').inside {
-            sh 'cat /proc/info'
+        docker.image('redis').withRun { container ->
+            sh 'ls -lah'
         }
     }
 
