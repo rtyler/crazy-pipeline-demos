@@ -1,11 +1,19 @@
 #!/usr/bin/env groovy
 
-node('docker') {
-    stage('Build') {
-        docker.image('alpine').inside {
-            echo 'im building'
-            sh 'echo "HELLO" > artifact.txt'
-            stash name: 'thething', includes: 'artifact.txt'
+parallel(jdk7: {
+    node('docker') {
+            docker.image('openjdk:7').inside {
+                echo 'im building'
+                sh 'echo "HELLO" > artifact.txt'
+                stash name: 'thething', includes: 'artifact.txt'
+            }
+        }
+    },
+    jdk8: {
+        node('docker') {
+            docker.image('openjdk:8').inside {
+                echo 'im building on 8'
+            }
         }
     }
 }
