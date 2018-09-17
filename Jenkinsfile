@@ -5,7 +5,7 @@ pipeline {
     
     stages {
         stage('Build') {
-            agennt { docker 'alpine' }
+            agent { docker 'alpine' }
             steps {
                 echo 'I am building'
                 sh 'uname -a'
