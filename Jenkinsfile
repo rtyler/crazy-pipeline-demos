@@ -1,20 +1,28 @@
 #!/usr/bin/env groovy
 
-node('docker') {
-    stage('Build') {
-        docker.image('alpine').inside {
-            echo 'im building'
-            sh 'uname -a'
+pipeline {
+    agent none
+    
+    stages {
+        stage('Build') {
+            agennt { docker 'alpine' }
+            steps {
+                echo 'I am building'
+                sh 'uname -a'
+            }
         }
-    }
-
-    stage('Test') {
-        sleep 10
-        docker.image('maven').inside {
-            sh 'cat /proc/meminfo'
+        stage('Test') {
+            agent { docker 'maven' }
+            steps {
+                sh 'mvn --version'
+            }
         }
-    }
-
-    stage('Deploy') {
+        stage('Deploy') {
+            agent { docker 'alpine' }
+            steps {
+                echo 'Deploying to serverless cloud containers etc'
+            }
+        }
+        
     }
 }
