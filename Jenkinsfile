@@ -6,7 +6,7 @@ pipeline {
         sh 'printenv'
       }
     }
-    stage('Test') [
+    stage('Test') {
       steps {
         sh 'printenv'
       }    
